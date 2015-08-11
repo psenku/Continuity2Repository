@@ -66,7 +66,7 @@ public class LMSTest extends TestListenerAdapter
     	//btnSignIn
     	}
     	catch (Exception e) {
-    		System.out.println("Inside exception catch block");
+    		System.out.println("Inside exception catch block..");
     		e.printStackTrace();
     	}
         //driver = new ChromeDriver();
