@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [LMSDemoSuite]">
+  <test name="LMS(failed)">
+    <classes>
+      <class name="lmsdemo.LMSTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="addCourse"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- lmsdemo.LMSTest -->
+    </classes>
+  </test> <!-- LMS(failed) -->
+</suite> <!-- Failed suite [LMSDemoSuite] -->

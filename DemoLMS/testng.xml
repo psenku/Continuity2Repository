@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="LMSDemoSuite">
+	<groups>
+		<run>
+			<include name="smoke"/>
+		</run>
+	</groups>
 
 <test name="LMS" >
+	<groups>
+		<run>
+			<include name="windows.*"/>
+			<include name="linux.*" />
+		</run>
+	</groups>
   	 <classes>
 		<class name="lmsdemo.LMSTest"/>
  	</classes>

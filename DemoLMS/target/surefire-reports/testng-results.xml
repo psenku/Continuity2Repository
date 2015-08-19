@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="LMSDemoSuite" duration-ms="8959" started-at="2015-08-12T13:35:07Z" finished-at="2015-08-12T13:35:16Z">
+    <groups>
+    </groups>
+    <test name="LMS" duration-ms="8959" started-at="2015-08-12T13:35:07Z" finished-at="2015-08-12T13:35:16Z">
+      <class name="lmsdemo.LMSTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:[LMSTest passed=0 failed=0 skipped=0]]" name="setUp" is-config="true" duration-ms="5585" started-at="2015-08-12T19:05:07Z" finished-at="2015-08-12T19:05:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="addCourse()[pri:0, instance:[LMSTest passed=0 failed=0 skipped=0]]" name="addCourse" duration-ms="2040" started-at="2015-08-12T19:05:12Z" finished-at="2015-08-12T19:05:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addCourse -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:[LMSTest passed=0 failed=0 skipped=0]]" name="tearDown" is-config="true" duration-ms="1326" started-at="2015-08-12T19:05:14Z" finished-at="2015-08-12T19:05:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- lmsdemo.LMSTest -->
+    </test> <!-- LMS -->
+  </suite> <!-- LMSDemoSuite -->
+</testng-results>
