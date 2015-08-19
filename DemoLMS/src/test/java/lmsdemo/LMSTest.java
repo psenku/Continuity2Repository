@@ -48,19 +48,22 @@ public class LMSTest extends TestListenerAdapter
         System.out.println("Inside set up....");
         
        // driver = new FirefoxDriver();
+      /*
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\venkatragavan\\git\\ltc\\LTC\\drivers\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
     	driver.manage().window().maximize();
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    
+	    */
         System.out.println("After creating the driver..");
         System.setProperty("webdriver.ie.driver", "C:\\Users\\venkatragavan\\git\\ltc\\LTC\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
-    	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+    	//DesiredCapabilities chromeCap = DesiredCapabilities.chrome();
+    	
+        DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
     	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
     	capabilities.setCapability("ignoreZoomSetting", true);
     	capabilities.setCapability("ignoreProtectedModeSettings" , true);
     	//driver = new FirefoxDriver();
-    	//driver = new InternetExplorerDriver(capabilities);
+    	driver = new InternetExplorerDriver(capabilities);
     	driver.get("http://192.168.3.16:201/Login.aspx");
     	//List <WebElement> elements = driver.findElements(By.cssSelector("*"));
     	/*
@@ -82,7 +85,6 @@ public class LMSTest extends TestListenerAdapter
     	
     	//ReadExcel.setCellData("C:\\Users\\venkatragavan\\git\\lms\\DemoLMS\\testdata\\tdata.xls", "FAIL",1,2);
     	//reading cell values from table
-    	/*
     	WebElement table = driver.findElement(By.id("ctl00_tblcphKlassAktLMS"));
     	List<WebElement> tableRows = table.findElements(By.tagName("tr"));
     	System.out.println("List size : " + tableRows.size());
@@ -92,11 +94,16 @@ public class LMSTest extends TestListenerAdapter
     		List<WebElement> cells = row.findElements(By.tagName("td"));
     		
     		for (WebElement cell : cells) {
-    			System.out.println("Cell value : " + cell.getText() + "Cell class : " + cell.getClass() + "Cell tag : " + cell.getTagName());
+    			//System.out.println("Cell value : " + cell.getText() + "Cell class : " + cell.getClass() + "Cell tag : " + cell.getTagName());
+    			System.out.println("Cell value : " + cell.getText());
+    			if (cell.getText().equalsIgnoreCase("Dabbawala")) {
+    				System.out.println("Found..added by Veenu");
+    				break;
+    			}
     		}
     	}
     	
-    	*/
+    	
   /*  	
     	WebElement table = driver.findElement(By.id("ctl00_tblcphKlassAktLMS"));
     	List <WebElement> noOfRows = table.findElements(By.tagName("tr"));
@@ -192,7 +199,8 @@ public void updateCourse() throws Exception {
 		
 		  Thread.sleep(2000);
 		  System.out.println("Update Course..");
-		 
+		    Assert.assertTrue(false);
+		  
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
