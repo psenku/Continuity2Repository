@@ -95,16 +95,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.18</version>
 				<configuration>
-					<systemProperties>
-           				<property>
-                        <name>usedefaultlisteners</name>
-                        <value>false</value>
-                    </property>
-            			<property>
-                        <name>listener</name>
-                        <value>org.testng.reporters.XMLReporter</value>
-                    </property>
-         			 </systemProperties>
 					<suiteXmlFiles>
             			<suiteXmlFile>testng.xml</suiteXmlFile>
           			</suiteXmlFiles>
