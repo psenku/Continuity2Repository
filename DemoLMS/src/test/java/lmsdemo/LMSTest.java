@@ -51,20 +51,22 @@ public class LMSTest extends TestListenerAdapter
       /*
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\venkatragavan\\git\\ltc\\LTC\\drivers\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
-    	driver.manage().window().maximize();
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    */
+    	*/
         System.out.println("After creating the driver..");
         System.setProperty("webdriver.ie.driver", "C:\\Users\\venkatragavan\\git\\ltc\\LTC\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
     	//DesiredCapabilities chromeCap = DesiredCapabilities.chrome();
     	
         DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
     	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+    	
     	capabilities.setCapability("ignoreZoomSetting", true);
     	capabilities.setCapability("ignoreProtectedModeSettings" , true);
     	//driver = new FirefoxDriver();
     	driver = new InternetExplorerDriver(capabilities);
     	driver.get("http://192.168.3.16:201/Login.aspx");
+    	driver.manage().window().maximize();
+   	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+   	    
     	//List <WebElement> elements = driver.findElements(By.cssSelector("*"));
     	/*
     	ReadExcel.setExcelFile("C:\\Users\\venkatragavan\\git\\lms\\DemoLMS\\testdata\\tdata.xls", "login");
@@ -74,23 +76,43 @@ public class LMSTest extends TestListenerAdapter
     	*/
     	//WebElement usrNameTxt = driver.findElement(By.id("txtUsername"));
     	//WebElement usrNameTxt = driver.findElement(By.xpath("//*[@id='txtUsername']"));
-    	WebElement usrNameTxt = driver.findElement(By.xpath("//*[@name='txtUsername']"));
+    	//WebElement usrNameTxt = driver.findElement(By.xpath("//*[@name='txtUsername']"));
+    	///html/body/form/div[4]/div[4]/div/div/div/div[1]/div[4]/div[1]/div[2]/input
+    	//WebElement usrNameTxt = driver.findElement(By.xpath("/html/body/form/div[4]/div[4]/div/div/div/div[1]/div[4]/div[1]/div[2]/input"));
+    	WebElement usrNameTxt = driver.findElement(By.xpath("//input[@name='txtUsername']"));
+    	//*[@id="txtUsername"]
+//    	/html/body/form/div[4]/div[4]/div/div/div/div[1]/div[4]/div[1]/div[2]/input
+//    	/html/body/form/div[4]/div[4]/div/div/div/div[1]/div[4]/div[2]/div[2]/input
+    	//By.xpath("//*[@id='ctl00_cphKlassAktLMS_gvTrainerBatchList']/tbody/tr[3]/td[5]/a")).click()
     	
     	usrNameTxt.clear();
     	usrNameTxt.sendKeys("vasanthica");
     	WebElement pwdTxt = driver.findElement(By.id("txtPassword"));
+    
     	pwdTxt.clear();
     	pwdTxt.sendKeys("dsrc1234");
     	WebElement btnSignIn = driver.findElement(By.id("btnSignIn"));
     	btnSignIn.click();
     	Thread.sleep(4000);
+    	//WebElement viewLearnerLink = driver.findElement(By.xpath("//*[@id='ctl00_cphKlassAktLMS_gvTrainerBatchList']/tbody/tr[3]/td[5]/a"));
+    
+    	//ctl00_cphKlassAktLMS_gvTrainerBatchList
     	
+    	//WebElement table = driver.findElement(By.id("ctl00_cphKlassAktLMS_gvTrainerBatchList"));
+    	
+    	
+    //	viewLearnerLink.click();
+    	//Thread.sleep(4000);
     	//ReadExcel.setCellData("C:\\Users\\venkatragavan\\git\\lms\\DemoLMS\\testdata\\tdata.xls", "FAIL",1,2);
     	//reading cell values from table
-    	/*
-    	WebElement table = driver.findElement(By.id("ctl00_tblcphKlassAktLMS"));
+    	
+    //	WebElement table = driver.findElement(By.id("ctl00_cphKlassAktLMS_gvTrainerBatchList"));
+    	WebElement table = driver.findElement(By.xpath("//table[@id='ctl00_cphKlassAktLMS_gvTrainerBatchList' and @class='tblBorder']"));
+    	//WebElement table = driver.findElement(By.xpath("//table[contains(@id,'ctl00_cphKlassAktLMS_gvTrainerBatchList')]"));
     	List<WebElement> tableRows = table.findElements(By.tagName("tr"));
     	System.out.println("List size : " + tableRows.size());
+    	int rowCount=1;
+    	File orgFile = new File("C:\\Users\\venkatragavan\\git\\lms\\DemoLMS"+".png");
     	
     	for (WebElement row : tableRows) {
     		
@@ -99,13 +121,23 @@ public class LMSTest extends TestListenerAdapter
     		for (WebElement cell : cells) {
     			//System.out.println("Cell value : " + cell.getText() + "Cell class : " + cell.getClass() + "Cell tag : " + cell.getTagName());
     			System.out.println("Cell value : " + cell.getText());
-    			if (cell.getText().equalsIgnoreCase("Dabbawala")) {
-    				System.out.println("Found..added by Veenu");
+    			if (cell.getText().contains("ISMS")) {
+    				System.out.println("Found..added by Kumar");
+    				
+    				//WebElement viewLearnerLink = driver.findElement(By.xpath("//*[@id='ctl00_cphKlassAktLMS_gvTrainerBatchList']/tbody/tr["+rowCount+"]/td[5]/a"));
+    				WebElement viewLearnerLink = driver.findElement(By.xpath("//table[@id='ctl00_cphKlassAktLMS_gvTrainerBatchList']/tbody/tr["+rowCount+"]/td[5]/a"));
+    				viewLearnerLink.click();
+    				Thread.sleep(4000);
+    				File tmpFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    		    	FileUtils.copyFile(tmpFile, orgFile);
+    		    				
     				break;
     			}
     		}
+    		System.out.println("Rowcount" + rowCount);
+    		rowCount++;
     	}
-    	*/
+    	
     	
   /*  	
     	WebElement table = driver.findElement(By.id("ctl00_tblcphKlassAktLMS"));
@@ -186,7 +218,7 @@ public class LMSTest extends TestListenerAdapter
  		  String currPageTitle = driver.getTitle();
  		  String currWinHandle = driver.getWindowHandle();
  		  System.out.println("Current URL : " + currURL + " "+ "Current Page Title : "+currPageTitle+" " + "Current Window Handle.. : " + currWinHandle);
- 		 
+ 		 //Assert.assertTrue(false);
  	} catch (Exception e) {
  		// TODO Auto-generated catch block
  		System.out.println("Current URL : ");
@@ -195,7 +227,7 @@ public class LMSTest extends TestListenerAdapter
  	  
     }
 
-@Test(groups={"windows.regression"})
+@Test(groups={"windows.regression"},dependsOnMethods={"addCourse"})
 public void updateCourse() throws Exception {
 	  
 	  try {
