@@ -27,16 +27,22 @@ import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import VRS.DemoLMS.ReadExcel;
+import VRS.DemoLMS.TestBase;
 
-public class LMSTest extends TestListenerAdapter
+public class LMSTest 
 {
-    protected WebDriver driver;
+    private WebDriver driver;
 
+    @BeforeSuite
+    public void befSuite() {
+    	System.out.println("Before suite is called..");
+    }
  
     @BeforeTest(alwaysRun=true)
     public void setUp()
@@ -47,27 +53,9 @@ public class LMSTest extends TestListenerAdapter
     	try {
         System.out.println("Inside set up....");
         
-       // driver = new FirefoxDriver();
-      /*
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\venkatragavan\\git\\ltc\\LTC\\drivers\\chromedriver_win32\\chromedriver.exe");
-        driver = new ChromeDriver();
-    	*/
-        System.out.println("After creating the driver..");
-        System.setProperty("webdriver.ie.driver", "C:\\Users\\venkatragavan\\git\\ltc\\LTC\\drivers\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
-    	//DesiredCapabilities chromeCap = DesiredCapabilities.chrome();
-    	
-        DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-    	capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-    	
-    	capabilities.setCapability("ignoreZoomSetting", true);
-    	capabilities.setCapability("ignoreProtectedModeSettings" , true);
-    	//driver = new FirefoxDriver();
-    	driver = new InternetExplorerDriver(capabilities);
-    	driver.get("http://192.168.3.16:201/Login.aspx");
-    	driver.manage().window().maximize();
-   	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-   	    
-    	//List <WebElement> elements = driver.findElements(By.cssSelector("*"));
+        driver = TestBase.getDriver();
+        
+     	//List <WebElement> elements = driver.findElements(By.cssSelector("*"));
     	/*
     	ReadExcel.setExcelFile("C:\\Users\\venkatragavan\\git\\lms\\DemoLMS\\testdata\\tdata.xls", "login");
     	System.out.println("before reading xcel");
@@ -84,11 +72,11 @@ public class LMSTest extends TestListenerAdapter
 //    	/html/body/form/div[4]/div[4]/div/div/div/div[1]/div[4]/div[1]/div[2]/input
 //    	/html/body/form/div[4]/div[4]/div/div/div/div[1]/div[4]/div[2]/div[2]/input
     	//By.xpath("//*[@id='ctl00_cphKlassAktLMS_gvTrainerBatchList']/tbody/tr[3]/td[5]/a")).click()
-    	
     	usrNameTxt.clear();
     	usrNameTxt.sendKeys("vasanthica");
     	WebElement pwdTxt = driver.findElement(By.id("txtPassword"));
-    
+    	StringBuffer buffer = new StringBuffer();
+    	
     	pwdTxt.clear();
     	pwdTxt.sendKeys("dsrc1234");
     	WebElement btnSignIn = driver.findElement(By.id("btnSignIn"));
@@ -112,8 +100,8 @@ public class LMSTest extends TestListenerAdapter
     	List<WebElement> tableRows = table.findElements(By.tagName("tr"));
     	System.out.println("List size : " + tableRows.size());
     	int rowCount=1;
-    	File orgFile = new File("C:\\Users\\venkatragavan\\git\\lms\\DemoLMS"+".png");
-    	
+    
+    	/*
     	for (WebElement row : tableRows) {
     		
     		List<WebElement> cells = row.findElements(By.tagName("td"));
@@ -128,16 +116,13 @@ public class LMSTest extends TestListenerAdapter
     				WebElement viewLearnerLink = driver.findElement(By.xpath("//table[@id='ctl00_cphKlassAktLMS_gvTrainerBatchList']/tbody/tr["+rowCount+"]/td[5]/a"));
     				viewLearnerLink.click();
     				Thread.sleep(4000);
-    				File tmpFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-    		    	FileUtils.copyFile(tmpFile, orgFile);
-    		    				
     				break;
     			}
     		}
     		System.out.println("Rowcount" + rowCount);
     		rowCount++;
     	}
-    	
+    	*/
     	
   /*  	
     	WebElement table = driver.findElement(By.id("ctl00_tblcphKlassAktLMS"));
@@ -218,7 +203,7 @@ public class LMSTest extends TestListenerAdapter
  		  String currPageTitle = driver.getTitle();
  		  String currWinHandle = driver.getWindowHandle();
  		  System.out.println("Current URL : " + currURL + " "+ "Current Page Title : "+currPageTitle+" " + "Current Window Handle.. : " + currWinHandle);
- 		 //Assert.assertTrue(false);
+ 		// Assert.assertTrue(false);
  	} catch (Exception e) {
  		// TODO Auto-generated catch block
  		System.out.println("Current URL : ");

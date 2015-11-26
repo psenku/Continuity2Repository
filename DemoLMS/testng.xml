@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="LMSDemoSuite">
+<suite name="LMSDemoSuite" parallel="tests" thread-count="3">
 	<groups>
 		<run>
 			<include name="smoke"/>
 		</run>
 	</groups>
+	
+	<listeners>
+      <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+      <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+  </listeners>
 
 <test name="LMS" >
 	<groups>
 		<run>
-			<include name="windows.*"/>
+			<exclude name="windows.*"/>
 			<include name="linux.*" />
 		</run>
 	</groups>
   	 <classes>
 		<class name="lmsdemo.LMSTest"/>
+
+		
  	</classes>
 </test> <!-- Default test -->
 

@@ -74,6 +74,12 @@
 	<artifactId>mysql-connector-java</artifactId>
 	<version>5.1.6</version>
 </dependency>
+<dependency>
+	<groupId>org.uncommons</groupId>
+	<artifactId>reportng</artifactId>
+	<version>1.1.4</version>
+</dependency>
+
 	
 	</dependencies>
 
